@@ -10,6 +10,17 @@
 @font-face {
   font-family: "Inter";
   font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../vendor/fonts/inter/regular/Inter-Regular.woff2") format("woff2"),
+    url("../vendor/fonts/inter/regular/Inter-Regular.woff") format("woff");
+}
+
+
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
   font-weight: 700;
   font-display: swap;
   src: url("../vendor/fonts/inter/bold/Inter-Bold.woff2") format("woff2"),

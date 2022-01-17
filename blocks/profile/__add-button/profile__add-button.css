@@ -1,0 +1,7 @@
+.profile__add-button {
+  display: flex;
+  border: 2px solid #ffffff;
+  margin: 33px auto;
+  width: calc(100% - 2 * 4px);
+
+}
