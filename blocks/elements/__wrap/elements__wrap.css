@@ -1,0 +1,8 @@
+.elements__wrap {
+  margin: 0;
+  padding: 25px 15px 25px 21px;
+  display: flex;
+  background-color: #ffffff;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+}

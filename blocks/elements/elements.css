@@ -1,0 +1,9 @@
+.elements {
+  margin: 36px 0 0;
+}
+
+@media screen and (min-width: 1280px) {
+  .elements {
+    margin: 49px 0 0;
+  }
+}
