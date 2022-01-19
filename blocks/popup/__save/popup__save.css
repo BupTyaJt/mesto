@@ -1,0 +1,15 @@
+.popup__save {
+  display: flex;
+  margin: 45px 22px 25px;
+  justify-content: center;
+  padding: 14px 0 14px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 0;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.popup__save:hover {
+  opacity: 0.8;
+}

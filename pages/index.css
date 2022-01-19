@@ -24,8 +24,7 @@
 @import url(../blocks/popup/__info/popup__info.css);
 @import url(../blocks/popup/__save/popup__save.css);
 @import url(../blocks/popup/__close/popup__close.css);
-
-
+@import url(../blocks/popup/__line/popup__line.css);
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);
