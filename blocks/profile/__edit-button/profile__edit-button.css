@@ -7,6 +7,11 @@
   border: 1px solid #ffffff;
   top: 280px;
   right: calc(38px + (100% - 320px)/2);
+  cursor: pointer;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.5;
 }
 
 @media screen and (min-width: 1280px) {
