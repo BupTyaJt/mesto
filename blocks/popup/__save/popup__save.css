@@ -1,15 +1,29 @@
 .popup__save {
   display: flex;
-  margin: 45px 22px 25px;
+  margin: 45px 22px 20px;
   justify-content: center;
-  padding: 14px 0 14px;
+  padding: 14px 0 15px;
   background-color: #000000;
   color: #ffffff;
   border: 0;
   cursor: pointer;
   border-radius: 2px;
+  font-family: "Inter", "Arial ", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .popup__save:hover {
   opacity: 0.8;
+}
+
+@media screen and (min-width: 600px) {
+  .popup__save {
+    margin: 48px 36px 37px;
+    padding: 14px 0 14px;
+    font-size: 18px;
+    line-height: 22px;
+  }
 }

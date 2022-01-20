@@ -22,3 +22,9 @@
     right: calc(594px + (100% - 1280px)/2);
   }
 }
+
+@media screen and (max-width: 305px) {
+  .profile__edit-button {
+    top: 253px;
+  }
+}
