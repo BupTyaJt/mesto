@@ -1,6 +1,6 @@
 .popup__info {
   padding: 0;
-  margin: 26px 22px 0;
+  margin: 30px 22px 0;
   background-color: #ffffff;
   font-family: "Inter", "Arial ", sans-serif;
   font-style: normal;
@@ -12,6 +12,6 @@
 
 @media screen and (min-width: 600px) {
   .popup__info {
-    margin: 26px 36px 0;
+    margin: 30px 36px 0;
   }
 }
