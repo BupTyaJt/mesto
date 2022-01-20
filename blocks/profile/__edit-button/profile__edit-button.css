@@ -7,6 +7,17 @@
   border: 1px solid #ffffff;
   top: 280px;
   right: calc(38px + (100% - 320px)/2);
+  cursor: pointer;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.5;
+}
+
+@media screen and (min-width: 321px) {
+  .profile__edit-button {
+    top: 253px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -15,5 +26,11 @@
     height: 22px;
     top: 196px;
     right: calc(594px + (100% - 1280px)/2);
+  }
+}
+
+@media screen and (max-width: 305px) {
+  .profile__edit-button {
+    top: 253px;
   }
 }
