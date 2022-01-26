@@ -1,12 +1,21 @@
 .profile__title {
-  margin: 26px 0 0;
+  margin: 26px 48px 0;
   color: #ffffff;
-  font-family: "Inter", "Arial ", sans-serif;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 27px;
   line-height: 33px;
-  text-align: center;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 321px) {
+  .profile__title {
+    text-align: center;
+  }
 }
 
 @media screen and (min-width: 1280px) {

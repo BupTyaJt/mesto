@@ -6,7 +6,7 @@
   height: 18px;
   border: 1px solid #ffffff;
   top: 280px;
-  right: calc(38px + (100% - 320px)/2);
+  right: calc(37px + (100% - 320px)/2);
   cursor: pointer;
 }
 

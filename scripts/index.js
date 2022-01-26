@@ -16,11 +16,11 @@ infoInput.value = profileInfo.textContent
 
 function openPopup(event) {
   event.preventDefault()
-  popup.classList.add('popup_opened')
+  popup.classList.add('popup__opened')
 }
 
 function closePopup() {
-  popup.classList.remove('popup_opened')
+  popup.classList.remove('popup__opened')
 }
 
 function saveDataPopup () {
