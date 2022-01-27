@@ -1,20 +1,23 @@
 .profile__info {
   margin: 7px 0 0px;
   color: #ffffff;
-  min-width: 282px;
   text-align: center;
-  font-family: "Inter", "Arial ", sans-serif;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 1280px) {
   .profile__info {
+    max-width: 570px;
     font-size: 18px;
     line-height: 22px;
     text-align: left;
-    margin: 8px 260px 0 0;
+    margin: 8px 0 0 30px;
   }
 }
