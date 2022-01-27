@@ -1,6 +1,7 @@
 .elements__title {
   display: block;
   margin: 0;
+  max-width: 217px;
   background-color: #ffffff;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
