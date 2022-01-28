@@ -14,10 +14,16 @@
   opacity: .6;
 }
 
+@media screen and (min-width: 1024px) {
+  .profile__add-button {
+    margin-top: 64px;
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .profile__add-button {
-    width: 166px;
+    width: 150px;
     height: 46px;
-    margin: 33px 0 0 0;
+    margin: 33px 0 30px auto;
   }
 }
