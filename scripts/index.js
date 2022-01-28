@@ -8,9 +8,6 @@ const nameInput = document.querySelector('.popup__input_value_name')
 const infoInput = document.querySelector('.popup__input_value_info')
 const elementLike = document.querySelector('.element__like')
 
-nameInput.value = profileTitle.textContent
-infoInput.value = profileInfo.textContent
-
 function openPopup() {
   nameInput.value = profileTitle.textContent
   infoInput.value = profileInfo.textContent
@@ -21,7 +18,7 @@ function closePopup() {
   popup.classList.remove('popup_opened')
 }
 
-function saveDataPopup (evt) {
+function saveDataPopup(evt) {
   evt.preventDefault()
   profileTitle.textContent = nameInput.value
   profileInfo.textContent = infoInput.value
@@ -31,7 +28,7 @@ function saveDataPopup (evt) {
 profileOpenPopupButton.addEventListener('click', openPopup)
 popupCloseButton.addEventListener('click', closePopup)
 form.addEventListener('submit', saveDataPopup)
-popup.addEventListener('keyup', function(enterKey) {
+popup.addEventListener('keyup', function (enterKey) {
   if (enterKey.keyCode == 13)
-  saveDataPopup(evt);
+    saveDataPopup(evt);
 });
