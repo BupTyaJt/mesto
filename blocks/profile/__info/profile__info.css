@@ -12,12 +12,15 @@
   overflow: hidden;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
   .profile__info {
+    position: relative;
     max-width: 570px;
     font-size: 18px;
     line-height: 22px;
     text-align: left;
     margin: 8px 0 0 30px;
+    padding: 0;
+    width: 100%;
   }
 }

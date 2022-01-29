@@ -1,13 +1,10 @@
 .profile__edit-button {
-  position: absolute;
   display: block;
   background: url('../../../images/edit_btn.svg') no-repeat center #000000;
-  margin: 0;
+  margin: 34px 20px 0 11px;
   width: 18px;
   height: 18px;
   border: 1px solid #ffffff;
-  top: 280px;
-  right: calc(38px + (100% - 320px)/2);
   cursor: pointer;
   transition: .5s ease;
 }
@@ -18,15 +15,8 @@
 
 @media screen and (min-width: 1024px) {
   .profile__edit-button {
-    position: static;
-    margin: -53px 0 0 553px;
+    margin: 17px 0 0 19px;
     width: 24px;
     height: 24px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .profile__edit-button {
-    margin: 35px 0 0 19px;
   }
 }
