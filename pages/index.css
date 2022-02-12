@@ -24,6 +24,10 @@
 @import url(../blocks/popup/__form/popup_form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 
+@import url(../blocks/popup/__big-photo/popup__big-photo.css);
+@import url(../blocks/popup/__photo-container/popup__photo-container.css);
+@import url(../blocks/popup/__photo-title/popup__photo-title.css);
+
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__card/elements__card.css);
 @import url(../blocks/elements/__wrap/elements__wrap.css);
