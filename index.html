@@ -33,7 +33,7 @@
     <p class='footer__copyright'>&copy; 2022 Mesto Russia</p>
   </footer>
 
-  <div class='popup'>
+  <div class='popup popup_edit'>
     <div class='popup__container'>
       <h2 class='popup__title'>Редактировать профиль</h2>
       <form class='popup__form' name='form'>
@@ -49,8 +49,8 @@
     <div class='popup__container'>
       <h2 class='popup__title'>Новое место</h2>
       <form class='popup__form' name='form'>
-        <input class='popup__input popup__input_value_name' type='text' name='title' value='Название' required>
-        <input class='popup__input popup__input_value_info' type='url' name='link' value='Ссылка на картинку' required>
+        <input class='popup__input popup__input_photo_name' type='text' name='title' value='Название' required>
+        <input class='popup__input popup__input_photo_link' type='url' name='link' value='Ссылка на картинку' required>
         <button class='popup__save' type='submit'>Сохранить</button>
       </form>
       <button class='popup__close popup__close_add' type='reset' aria-label='Закрыть'></button>
@@ -64,8 +64,6 @@
       <h2 class='popup__photo-title'></h2>
     </div>
   </div>
-
-
 
   <template id='card_template'>
     <article class='elements__card'>
