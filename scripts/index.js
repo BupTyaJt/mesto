@@ -81,11 +81,6 @@ popupCloseButtons.forEach(button => { //слушатель кнопок закр
   button.addEventListener('click', () => closePopup(popup))
 })
 
-popup.addEventListener('keyup', function (enterKey) { //слушатель кнопок Ентер на попапах
-  if (enterKey.keyCode == 13)
-    saveDataPopup(evt);
-})
-
 function openPopupPhoto(evt) { //попап большой картинки элемента
   popupBigPhoto.src = evt.target.src
   popupTitlePhoto.textContent = evt.target.alt
@@ -141,8 +136,8 @@ function savePopupAdd(evt) { //данные из инпутов в функци�
   }
   addNewCard(newCard)
   closePopup(popupAdd)
-  popupPhotoName.value = 'Название'
-  popupPhotoLink.value = 'Ссылка на картинку' //возвращаем значения по-умолчанию
+  popupPhotoName.value = ''
+  popupPhotoLink.value = '' //чистим инпуты
 }
 
 function addNewCard(Card) { //новый элемет в начало списка
