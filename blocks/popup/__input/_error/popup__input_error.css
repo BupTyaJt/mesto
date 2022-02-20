@@ -1,0 +1,7 @@
+.popup__input_error:first-child {
+  border-bottom: 1px solid #FF0000;
+}
+
+.popup__input_error:nth-child(3) {
+  border-bottom: 1px solid #FF0000;
+}
