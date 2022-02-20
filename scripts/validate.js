@@ -11,7 +11,6 @@ const enableValidation = (set) => { //валидация по параметра
 const setEventListeners = (formSelector, set) => { //добавляем слушателей
   const inputList = Array.from(formSelector.querySelectorAll(set.inputSelector));
   const buttonElement = formSelector.querySelector(set.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, set) //проверяем состояние кнопки сразу
   inputList.forEach((inputSelector) => {
     inputSelector.addEventListener('input', () => { //слушатель события Инпут
       checkInputValidity(inputSelector, set); //проверяем валидность

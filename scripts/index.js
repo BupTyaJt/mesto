@@ -95,6 +95,9 @@ function openPopupPhoto(evt) { //попап большой картинки эл
 }
 
 function openPopup(item) { //открытие попапа
+  const buttonElement = item.querySelector('.popup__save') //выбираем кнопку
+  buttonElement.classList.add('popup__save_inactive') //применяем стиль к выключаемой кнопке
+  buttonElement.disabled = 'disabled' //выключаем кнопку до валидации
   item.classList.add('popup_opened')
   document.addEventListener('keydown', closePopupEsc) //вешаем листенер Esc
 }
