@@ -50,6 +50,7 @@ const popup = document.querySelector('.popup') //все попапы
 
 const popupCloseButtons = document.querySelectorAll('.popup__close') //закрытие
 
+
 const template = document.querySelector('#card_template').content //достаем контент тейплейта
 
 const elements = document.querySelector('.elements') //задаем класс элементов куда складываем
@@ -79,6 +80,11 @@ addPopupButton.addEventListener('click', function () {
 popupCloseButtons.forEach(button => { //слушатель кнопок закрыть
   const popup = button.closest('.popup')
   button.addEventListener('click', () => closePopup(popup))
+  popup.addEventListener('mouseup', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup)
+    }
+  })
 })
 
 function openPopupPhoto(evt) { //попап большой картинки элемента
@@ -90,10 +96,19 @@ function openPopupPhoto(evt) { //попап большой картинки эл
 
 function openPopup(item) { //открытие попапа
   item.classList.add('popup_opened')
+  document.addEventListener('keydown', closePopupEsc) //вешаем листенер Esc
+}
+
+closePopupEsc = (evt) => { //функция листенера для закрытия попапа по Esc
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened') //определяем открытый попап
+    closePopup(popupOpened)
+  }
 }
 
 function closePopup(item) { //закрытие попапа
   item.classList.remove('popup_opened')
+  document.removeEventListener('keydown', closePopupEsc) //удаляем листенер Esc
 }
 
 function deleteCard(evt) { //удаление элемента
