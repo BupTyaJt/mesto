@@ -65,15 +65,23 @@ function renderItem(card) { //добавляем заданые элементы
 
 render() //рендерим элементы
 
+const disableSaveButton = (element) => {  //выключакм кнопку сохранения
+  const buttonElement = element.querySelector('.popup__save') //выбираем кнопку
+  buttonElement.classList.add('popup__save_inactive') //применяем стиль к выключаемой кнопке
+  buttonElement.disabled = 'disabled' //выключаем кнопку до валидации
+}
+
 //слушатель изменить
 profileOpenPopupButton.addEventListener('click', function () { //данные из профиля в инпуты
   profileNameInput.value = profileTitle.textContent
-  profileInfoInput.value = profileInfo.textContent;
+  profileInfoInput.value = profileInfo.textContent
+  disableSaveButton(popupEdit)
   openPopup(popupEdit)
 })
 
 //слушатель добавить
 addPopupButton.addEventListener('click', function () {
+  disableSaveButton(popupAdd)
   openPopup(popupAdd)
 })
 
@@ -95,9 +103,6 @@ function openPopupPhoto(evt) { //попап большой картинки эл
 }
 
 function openPopup(item) { //открытие попапа
-  const buttonElement = item.querySelector('.popup__save') //выбираем кнопку
-  buttonElement.classList.add('popup__save_inactive') //применяем стиль к выключаемой кнопке
-  buttonElement.disabled = 'disabled' //выключаем кнопку до валидации
   item.classList.add('popup_opened')
   document.addEventListener('keydown', closePopupEsc) //вешаем листенер Esc
 }
