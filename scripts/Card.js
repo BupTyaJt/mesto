@@ -1,4 +1,5 @@
 export default class Card {
+<<<<<<< HEAD
   constructor(name, link, cardSelector) {
     this._name = name
     this._link = link
@@ -53,3 +54,8 @@ render(card){
 }
 
 console.log(Card)
+=======
+  constructor(data, addingCardHandle, templateCard, cardSelector){
+  }
+}
+>>>>>>> parent of 09f8577 (Revert "начать ПР7")
