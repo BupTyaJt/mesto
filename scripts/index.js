@@ -1,29 +1,10 @@
-// данные на входе
-const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import initialCards from './initialCards.js'
+import Card from './Card.js'
+
+
+
+
+
 
 //попап изменения профиля
 const popupEdit = document.querySelector('.popup_edit') //попап измения
@@ -53,19 +34,25 @@ const popupCloseButtons = document.querySelectorAll('.popup__close') //закр�
 
 const template = document.querySelector('#card_template').content //достаем контент тейплейта
 
+
 const elements = document.querySelector('.elements') //задаем класс элементов куда складываем
 
-function render() { //элементы из данных на входе
-  initialCards.forEach(renderItem);
+
+
+
+function render(card) { //добавляем заданые элементы в конец
+  card.append(createCard(card))
 }
 
-function renderItem(card) { //добавляем заданые элементы в конец
-  elements.append(createCard(card))
-}
+
+
 
 render() //рендерим элементы
 
-const disableSaveButton = (element) => {  //выключакм кнопку сохранения
+
+
+
+const disableSaveButton = (element) => { //выключакм кнопку сохранения
   const buttonElement = element.querySelector('.popup__save') //выбираем кнопку
   buttonElement.classList.add('popup__save_inactive') //применяем стиль к выключаемой кнопке
   buttonElement.disabled = 'disabled' //выключаем кнопку до валидации
@@ -107,7 +94,7 @@ function openPopup(item) { //открытие попапа
   document.addEventListener('keydown', closePopupEsc) //вешаем листенер Esc
 }
 
-closePopupEsc = (evt) => { //функция листенера для закрытия попапа по Esc
+const closePopupEsc = (evt) => { //функция листенера для закрытия попапа по Esc
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened') //определяем открытый попап
     closePopup(popupOpened)
@@ -170,3 +157,4 @@ function addNewCard(Card) { //новый элемет в начало списк
 formEdit.addEventListener('submit', saveDataPopupEdit) //субмит на попап изменить
 
 formAdd.addEventListener('submit', savePopupAdd) //субмит на попап создать
+
