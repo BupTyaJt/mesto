@@ -1,61 +1,45 @@
-export default class Card {
-<<<<<<< HEAD
-  constructor(name, link, cardSelector) {
-    this._name = name
-    this._link = link
+class Card {
+  constructor(data, cardSelector) {
+    this._name = data.name
+    this._link = data.link
     this._cardSelector = cardSelector
-
-    console.log(cardSelector)
   }
-
 
   _getTemplate() {
-    return document.querySelector(cardSelector)
+    const cardElement = document
+      .querySelector('#card_template')
       .content
-      .children[0]
+      .querySelector('.elements__card')
       .cloneNode(true)
+
+    return cardElement
   }
 
-addCard(card){
-  card.render(cardSelector)
-}
-
-render(card){
-  this._cardSelector.forEach((item) => {
-    const card = this._createCard(item.name, item.link)
-    card.render(this._getTemplate)
-  })
-  card.append(this._getTemplate)
-}
-
-
-
-
-/*
-  generateCard() {
-    cardElement = this._getTemplate();
-    this._cardElement.querySelector('.elements__photo').src = this._link
-    this._cardElement.querySelector('.elements__title').textContent = this._name
+  _deleteCard() { //удаление элемента
+    this._element.remove()
   }
 
-  /*
-  _setEventListeners() {
+  _cardLikeHandler() { //лайк элементу
+    this._element.querySelector('.elements__like').classList.toggle('elements__like_liked')
+  }
+
+  _addEventListeners() { //вешаем листенеры
     this._element.querySelector('.elements__delete').addEventListener('click', () => {
-      this._deleteCard(evt)
+      this._deleteCard();
     })
     this._element.querySelector('.elements__like').addEventListener('click', () => {
-      this._like(evt)
-    })
-    this._element.querySelector('.elements__delete').addEventListener('click', () => {
-      this._deleteCard(evt)
+      this._cardLikeHandler();
     })
   }
-  */
+
+  generateCard() {
+    this._element = this._getTemplate()
+    this._element.querySelector('.elements__photo').src = this._link
+    this._element.querySelector('.elements__title').textContent = this._name
+    this._addEventListeners(this._element)
+    return this._element
+  }
+
 }
 
-console.log(Card)
-=======
-  constructor(data, addingCardHandle, templateCard, cardSelector){
-  }
-}
->>>>>>> parent of 09f8577 (Revert "начать ПР7")
+export default Card

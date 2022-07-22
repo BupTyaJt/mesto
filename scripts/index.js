@@ -1,42 +1,6 @@
-<<<<<<< HEAD
-import initialCards from './initialCards.js'
+import initCards from './initCards.js'
 import Card from './Card.js'
 
-
-
-
-
-=======
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
-
-// данные на входе
-const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
->>>>>>> parent of 09f8577 (Revert "начать ПР7")
 
 //попап изменения профиля
 const popupEdit = document.querySelector('.popup_edit') //попап измения
@@ -63,25 +27,17 @@ const popup = document.querySelector('.popup') //все попапы
 
 const popupCloseButtons = document.querySelectorAll('.popup__close') //закрытие
 
-
-const template = document.querySelector('#card_template').content //достаем контент тейплейта
-
+const cardSelector = '#card_template' //селектор тейплейта
 
 const elements = document.querySelector('.elements') //задаем класс элементов куда складываем
 
 
-
-
-function render(card) { //добавляем заданые элементы в конец
-  card.append(createCard(card))
-}
-
-
-
-
-render() //рендерим элементы
-
-
+initCards.forEach((data, cardSelector) => { //элементы на входе
+  const card = new Card(data, cardSelector)
+  const cardElement = card.generateCard()
+  addListeners(cardElement)
+  elements.append(cardElement)
+})
 
 
 const disableSaveButton = (element) => { //выключакм кнопку сохранения
@@ -126,7 +82,7 @@ function openPopup(item) { //открытие попапа
   document.addEventListener('keydown', closePopupEsc) //вешаем листенер Esc
 }
 
-const closePopupEsc = (evt) => { //функция листенера для закрытия попапа по Esc
+function closePopupEsc(evt) { //функция листенера для закрытия попапа по Esc
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened') //определяем открытый попап
     closePopup(popupOpened)
@@ -138,36 +94,11 @@ function closePopup(item) { //закрытие попапа
   document.removeEventListener('keydown', closePopupEsc) //удаляем листенер Esc
 }
 
-function deleteCard(evt) { //удаление элемента
-  evt.target.closest('.elements__card').remove()
-}
-
-function like(evt) { //лайки
-  evt.target.classList.toggle('elements__like_liked')
-}
-
 function saveDataPopupEdit(evt) { //сохранение профиля с инпутов
   evt.preventDefault()
   profileTitle.textContent = profileNameInput.value
   profileInfo.textContent = profileInfoInput.value
   closePopup(popupEdit)
-}
-
-function createCard(card) { //создаем новый элемент со слушателями через функцию
-  const newItem = template.cloneNode(true);
-  const cardName = newItem.querySelector('.elements__title')
-  const cardPhoto = newItem.querySelector('.elements__photo')
-  cardName.textContent = card.name
-  cardPhoto.src = card.link
-  cardPhoto.alt = card.name
-  addListeners(newItem)
-  return newItem
-}
-
-function addListeners(newCard) { //добавляем слушателей в новый элемент
-  newCard.querySelector('.elements__photo').addEventListener('click', openPopupPhoto)
-  newCard.querySelector('.elements__delete').addEventListener('click', deleteCard)
-  newCard.querySelector('.elements__like').addEventListener('click', like)
 }
 
 function savePopupAdd(evt) { //данные из инпутов в функцию создания нового элемента
@@ -182,11 +113,17 @@ function savePopupAdd(evt) { //данные из инпутов в функци�
   popupPhotoLink.value = '' //чистим инпуты
 }
 
-function addNewCard(Card) { //новый элемет в начало списка
-  elements.prepend(createCard(Card))
+function addNewCard(card) { //новый элемет в начало списка
+  const newCard = new Card(card, cardSelector)
+  const newItem = newCard.generateCard()
+  addListeners(newItem)
+  elements.prepend(newItem)
+}
+
+function addListeners(newCard) { //добавляем слушателей в новый элемент
+  newCard.querySelector('.elements__photo').addEventListener('click', openPopupPhoto)
 }
 
 formEdit.addEventListener('submit', saveDataPopupEdit) //субмит на попап изменить
 
 formAdd.addEventListener('submit', savePopupAdd) //субмит на попап создать
-
