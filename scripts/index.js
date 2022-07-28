@@ -1,6 +1,6 @@
 import initCards from './initCards.js'
 import Card from './Card.js'
-
+import FormValidator from './FormValidator.js'
 
 //попап изменения профиля
 const popupEdit = document.querySelector('.popup_edit') //попап измения
@@ -23,14 +23,28 @@ const popupPhoto = document.querySelector('.popup_photo')
 const popupBigPhoto = popupPhoto.querySelector('.popup__big-photo')
 const popupTitlePhoto = popupPhoto.querySelector('.popup__photo-title')
 
-const popup = document.querySelector('.popup') //все попапы
-
 const popupCloseButtons = document.querySelectorAll('.popup__close') //закрытие
 
-const cardSelector = '#card_template' //селектор тейплейта
+const cardSelector = '#card_template' //селектор темплейта
 
 const elements = document.querySelector('.elements') //задаем класс элементов куда складываем
 
+//валидация конфиг
+const set = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save_inactive',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error'
+}
+
+//включаем валидацию
+const formEditValidation = new FormValidator(set, formEdit)
+formEditValidation.enableValidation()
+
+const formAddValidation = new FormValidator(set, formAdd)
+formAddValidation.enableValidation()
 
 initCards.forEach((data, cardSelector) => { //элементы на входе
   const card = new Card(data, cardSelector)
@@ -38,7 +52,6 @@ initCards.forEach((data, cardSelector) => { //элементы на входе
   addListeners(cardElement)
   elements.append(cardElement)
 })
-
 
 const disableSaveButton = (element) => { //выключакм кнопку сохранения
   const buttonElement = element.querySelector('.popup__save') //выбираем кнопку
@@ -51,12 +64,14 @@ profileOpenPopupButton.addEventListener('click', function () { //данные и
   profileNameInput.value = profileTitle.textContent
   profileInfoInput.value = profileInfo.textContent
   disableSaveButton(popupEdit)
+  formEditValidation.resetValidation() //скидываем валидацию профиля
   openPopup(popupEdit)
 })
 
 //слушатель добавить
 addPopupButton.addEventListener('click', function () {
   disableSaveButton(popupAdd)
+  formAddValidation.resetValidation() //скидываем валидацию добавления карточки
   openPopup(popupAdd)
 })
 
@@ -90,6 +105,8 @@ function closePopupEsc(evt) { //функция листенера для зак�
 }
 
 function closePopup(item) { //закрытие попапа
+  popupPhotoName.value = ''
+  popupPhotoLink.value = '' //чистим инпуты
   item.classList.remove('popup_opened')
   document.removeEventListener('keydown', closePopupEsc) //удаляем листенер Esc
 }

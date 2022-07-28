@@ -11,7 +11,6 @@ class Card {
       .content
       .querySelector('.elements__card')
       .cloneNode(true)
-
     return cardElement
   }
 
@@ -39,7 +38,6 @@ class Card {
     this._addEventListeners(this._element)
     return this._element
   }
-
 }
 
 export default Card
