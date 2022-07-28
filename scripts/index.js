@@ -1,29 +1,6 @@
-// данные на входе
-const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import initCards from './initCards.js'
+import Card from './Card.js'
+import FormValidator from './FormValidator.js'
 
 //попап изменения профиля
 const popupEdit = document.querySelector('.popup_edit') //попап измения
@@ -46,26 +23,37 @@ const popupPhoto = document.querySelector('.popup_photo')
 const popupBigPhoto = popupPhoto.querySelector('.popup__big-photo')
 const popupTitlePhoto = popupPhoto.querySelector('.popup__photo-title')
 
-const popup = document.querySelector('.popup') //все попапы
-
 const popupCloseButtons = document.querySelectorAll('.popup__close') //закрытие
 
-
-const template = document.querySelector('#card_template').content //достаем контент тейплейта
+const cardSelector = '#card_template' //селектор темплейта
 
 const elements = document.querySelector('.elements') //задаем класс элементов куда складываем
 
-function render() { //элементы из данных на входе
-  initialCards.forEach(renderItem);
+//валидация конфиг
+const set = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save_inactive',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error'
 }
 
-function renderItem(card) { //добавляем заданые элементы в конец
-  elements.append(createCard(card))
-}
+//включаем валидацию
+const formEditValidation = new FormValidator(set, formEdit)
+formEditValidation.enableValidation()
 
-render() //рендерим элементы
+const formAddValidation = new FormValidator(set, formAdd)
+formAddValidation.enableValidation()
 
-const disableSaveButton = (element) => {  //выключакм кнопку сохранения
+initCards.forEach((data, cardSelector) => { //элементы на входе
+  const card = new Card(data, cardSelector)
+  const cardElement = card.generateCard()
+  addListeners(cardElement)
+  elements.append(cardElement)
+})
+
+const disableSaveButton = (element) => { //выключакм кнопку сохранения
   const buttonElement = element.querySelector('.popup__save') //выбираем кнопку
   buttonElement.classList.add('popup__save_inactive') //применяем стиль к выключаемой кнопке
   buttonElement.disabled = 'disabled' //выключаем кнопку до валидации
@@ -76,12 +64,14 @@ profileOpenPopupButton.addEventListener('click', function () { //данные и
   profileNameInput.value = profileTitle.textContent
   profileInfoInput.value = profileInfo.textContent
   disableSaveButton(popupEdit)
+  formEditValidation.resetValidation() //скидываем валидацию профиля
   openPopup(popupEdit)
 })
 
 //слушатель добавить
 addPopupButton.addEventListener('click', function () {
   disableSaveButton(popupAdd)
+  formAddValidation.resetValidation() //скидываем валидацию добавления карточки
   openPopup(popupAdd)
 })
 
@@ -107,7 +97,7 @@ function openPopup(item) { //открытие попапа
   document.addEventListener('keydown', closePopupEsc) //вешаем листенер Esc
 }
 
-closePopupEsc = (evt) => { //функция листенера для закрытия попапа по Esc
+function closePopupEsc(evt) { //функция листенера для закрытия попапа по Esc
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened') //определяем открытый попап
     closePopup(popupOpened)
@@ -115,16 +105,10 @@ closePopupEsc = (evt) => { //функция листенера для закры
 }
 
 function closePopup(item) { //закрытие попапа
+  popupPhotoName.value = ''
+  popupPhotoLink.value = '' //чистим инпуты
   item.classList.remove('popup_opened')
   document.removeEventListener('keydown', closePopupEsc) //удаляем листенер Esc
-}
-
-function deleteCard(evt) { //удаление элемента
-  evt.target.closest('.elements__card').remove()
-}
-
-function like(evt) { //лайки
-  evt.target.classList.toggle('elements__like_liked')
 }
 
 function saveDataPopupEdit(evt) { //сохранение профиля с инпутов
@@ -132,23 +116,6 @@ function saveDataPopupEdit(evt) { //сохранение профиля с ин�
   profileTitle.textContent = profileNameInput.value
   profileInfo.textContent = profileInfoInput.value
   closePopup(popupEdit)
-}
-
-function createCard(card) { //создаем новый элемент со слушателями через функцию
-  const newItem = template.cloneNode(true);
-  const cardName = newItem.querySelector('.elements__title')
-  const cardPhoto = newItem.querySelector('.elements__photo')
-  cardName.textContent = card.name
-  cardPhoto.src = card.link
-  cardPhoto.alt = card.name
-  addListeners(newItem)
-  return newItem
-}
-
-function addListeners(newCard) { //добавляем слушателей в новый элемент
-  newCard.querySelector('.elements__photo').addEventListener('click', openPopupPhoto)
-  newCard.querySelector('.elements__delete').addEventListener('click', deleteCard)
-  newCard.querySelector('.elements__like').addEventListener('click', like)
 }
 
 function savePopupAdd(evt) { //данные из инпутов в функцию создания нового элемента
@@ -163,8 +130,15 @@ function savePopupAdd(evt) { //данные из инпутов в функци�
   popupPhotoLink.value = '' //чистим инпуты
 }
 
-function addNewCard(Card) { //новый элемет в начало списка
-  elements.prepend(createCard(Card))
+function addNewCard(card) { //новый элемет в начало списка
+  const newCard = new Card(card, cardSelector)
+  const newItem = newCard.generateCard()
+  addListeners(newItem)
+  elements.prepend(newItem)
+}
+
+function addListeners(newCard) { //добавляем слушателей в новый элемент
+  newCard.querySelector('.elements__photo').addEventListener('click', openPopupPhoto)
 }
 
 formEdit.addEventListener('submit', saveDataPopupEdit) //субмит на попап изменить
