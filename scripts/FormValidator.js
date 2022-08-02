@@ -12,7 +12,7 @@ class FormValidator {
     )
   }
 
-  enableValidation() {  //включение валидации
+  enableValidation() { //включение валидации
     this._form.addEventListener(this._form, this._setEventListeners())
   }
 
