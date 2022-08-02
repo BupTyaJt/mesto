@@ -13,7 +13,7 @@ class FormValidator {
   }
 
   enableValidation() {  //включение валидации
-    this._form.addEventListener('submit', this._setEventListeners())
+    this._form.addEventListener(this._form, this._setEventListeners())
   }
 
   _setEventListeners() { //слушатели проверка валидности и состояния кнопки

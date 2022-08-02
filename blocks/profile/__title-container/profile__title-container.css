@@ -1,4 +1,13 @@
 .profile__title-container {
   display: flex;
   margin: 0 auto;
+  text-align: left;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__title-container {
+    margin: 0 0 0 30px;
+    min-width: 346px;
+  }
 }
