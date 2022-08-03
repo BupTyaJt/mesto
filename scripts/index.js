@@ -20,6 +20,10 @@ const formAdd = popupAdd.querySelector('.popup__form') //форма добавл
 
 const popupCloseButtons = document.querySelectorAll('.popup__close') //закрытие
 
+const cardPopupPhoto = document.querySelector('.popup_photo')
+const popupBigPhoto = cardPopupPhoto.querySelector('.popup__big-photo')
+const popupTitlePhoto = cardPopupPhoto.querySelector('.popup__photo-title')
+
 const cardSelector = '#card_template' //селектор темплейта
 
 const elements = document.querySelector('.elements') //задаем класс элементов куда складываем
@@ -43,7 +47,7 @@ formAddValidation.enableValidation()
 
 
 function createCard(data) { //генерация карточек через класс
-  const newCard = new Card(data, cardSelector)
+  const newCard = new Card(data, cardSelector, openImagePopup)
   const newItem = newCard.generateCard()
   return newItem
 }
@@ -70,10 +74,11 @@ profileOpenPopupButton.addEventListener('click', function () { //данные и
   openPopup(popupEdit)
 })
 
-//слушатель добавить с очисткой инпутов (чистка инпутов перенесена из закрытия исходя из предыдущих замечаний)
+//слушатель добавить с очисткой инпутов
 buttonAddPopup.addEventListener('click', function () {
   popupPhotoName.value = ''
   popupPhotoLink.value = ''
+  formAddValidation.resetValidation() //скидываем валидацию добавления карточки
   openPopup(popupAdd)
 })
 
@@ -87,6 +92,13 @@ popupCloseButtons.forEach(button => { //слушатель кнопок закр
   })
 })
 
+function openImagePopup(name, link) { //новая функция открытия попапа большой картинки
+  popupBigPhoto.src = link
+  popupBigPhoto.alt = name
+  popupTitlePhoto.textContent = name
+  openPopup(cardPopupPhoto)
+}
+
 function openPopup(item) { //открытие попапа
   item.classList.add('popup_opened')
   document.addEventListener('keydown', closePopupEsc) //вешаем листенер Esc
@@ -99,9 +111,7 @@ function closePopupEsc(evt) { //функция листенера для зак�
   }
 }
 
-function closePopup(item) { //закрытие попапа очистка инпутов перенесена в открытие (хотя полагаю что им место здесь)
-  //popupPhotoName.value = ''
-  //popupPhotoLink.value = ''
+function closePopup(item) {
   item.classList.remove('popup_opened')
   document.removeEventListener('keydown', closePopupEsc) //удаляем листенер Esc
 }
@@ -122,8 +132,6 @@ function savePopupAdd(evt) { //данные из инпутов в функци�
   }
   addCard(newCard)
   closePopup(popupAdd)
-  popupPhotoName.value = ''
-  popupPhotoLink.value = '' //чистим инпуты
 }
 
 formEdit.addEventListener('submit', saveDataPopupEdit) //субмит на попап изменить

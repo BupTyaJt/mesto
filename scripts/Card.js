@@ -1,9 +1,10 @@
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, openImagePopup) {
     this._name = data.name
     this._link = data.link
     data.alt = this._name
     this._cardSelector = cardSelector
+    this._openImagePopup = openImagePopup
   }
 
   _getTemplate() {
@@ -24,29 +25,6 @@ class Card {
     this._likeList.classList.toggle('elements__like_liked')
   }
 
-  _openPopupPhoto(evt) { //открвтие попапа большой картинки элемента
-    const cardPopupPhoto = document.querySelector('.popup_photo')
-    const popupBigPhoto = cardPopupPhoto.querySelector('.popup__big-photo')
-    const popupTitlePhoto = cardPopupPhoto.querySelector('.popup__photo-title')
-    const target = evt.target
-    popupBigPhoto.src = target.src
-    popupTitlePhoto.textContent = target.alt
-    cardPopupPhoto.classList.add('popup_opened')
-    document.addEventListener('keydown', closePopupPhotoEsc) // листенер на еск на закрытие большой картинки
-
-    function closePopupPhotoEsc(evt) { // функция листенера на еск
-      if (evt.key === 'Escape') {
-        const popupOpened = document.querySelector('.popup_opened') //определяем открытый попап
-        closePopupPhoto(popupOpened)
-      }
-    }
-
-    function closePopupPhoto() { //закрытие попапа большой картинки
-      cardPopupPhoto.classList.remove('popup_opened')
-      document.removeEventListener('keydown', closePopupEsc) //удаляем листенер Esc
-    }
-  }
-
   _addEventListeners() { //вешаем листенеры
     this._element.querySelector('.elements__delete').addEventListener('click', () => {
       this._deleteCard()
@@ -54,17 +32,18 @@ class Card {
     this._likeList.addEventListener('click', () => {
       this._cardLikeHandler()
     })
-    this._element.querySelector('.elements__photo').addEventListener('click', (evt) => {
-      this._openPopupPhoto(evt)
+    this._cardImage.addEventListener('click', () => {
+      this._openImagePopup(this._name, this._link)
     })
   }
 
   generateCard() {
     this._element = this._getTemplate()
-    this._element.querySelector('.elements__photo').src = this._link
+    this._cardImage = this._element.querySelector('.elements__photo') //поиск и определение элемента картинки
+    this._cardImage.src = this._link
     this._element.querySelector('.elements__title').textContent = this._name
-    this._element.querySelector('.elements__photo').alt = this._name
-    this._likeList = this._element.querySelector('.elements__like')
+    this._cardImage.alt = this._name
+    this._likeList = this._element.querySelector('.elements__like') //поиск и определение элемента лайка
     this._addEventListeners(this._element)
     return this._element
   }
