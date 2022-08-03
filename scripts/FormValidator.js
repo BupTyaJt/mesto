@@ -13,7 +13,7 @@ class FormValidator {
   }
 
   enableValidation() { //включение валидации
-    this._form.addEventListener(this._form, this._setEventListeners())
+    this._setEventListeners()
   }
 
   _setEventListeners() { //слушатели проверка валидности и состояния кнопки
@@ -27,7 +27,7 @@ class FormValidator {
   }
 
   _toggleButtonState() { //активация кнопки при валидности всех полей
-    if (this._hasInvalidInput(this._formList)) {
+    if (this._hasInvalidInput(this._buttonElement)) {
       this._buttonElement.classList.add(this._set.inactiveButtonClass)
       this._buttonElement.setAttribute('disabled', true)
     } else {
